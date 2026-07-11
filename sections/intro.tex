@@ -89,7 +89,18 @@ App.~\ref{app:family}).
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig1_hero.pdf}
+\IfFileExists{figures/fig1_hero.pdf}{%
+\includegraphics[width=\textwidth]{figures/fig1_hero.pdf}}{%
+\fbox{\parbox[c][4.6cm][c]{0.96\textwidth}{\centering
+\emph{Hero figure (figures/fig1\_hero.pdf).}\\[4pt]
+\textbf{Left:} write-gating schematic. Context ``Elena wandered the Plaza
+Mayor\ldots'' $\rightarrow$ model silently infers \emph{madrid} (high in the
+J-lens workspace readout $\checkmark$) but rates it unimportant verbally
+($\times$) $\rightarrow$ budget-$k$ gate on the verbal report drops the item
+needed for ``What language should Elena use?''.\\[4pt]
+\textbf{Right:} $2\times2$ AUC heatmap, regime (explicit / inferred)
+$\times$ channel (workspace $W$ / verbal $V$), showing the dissociation:
+$V$ wins on explicit, is anti-calibrated on inferred; $W$ the reverse.}}}
 \caption{\textbf{Left:} the write-gating problem. Reading ``Elena wandered the
 Plaza Mayor\ldots'', the model silently infers \emph{madrid}, and the inference
 is visible in a J-lens-style workspace readout of its residual stream; asked

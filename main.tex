@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[letterpaper,margin=1in]{geometry}
+\usepackage{times}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{xcolor}
+\usepackage[round]{natbib}
+\usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
+\usepackage{caption}
+\usepackage{longtable}
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\captionsetup{font=small,labelfont=bf}
+\usepackage{titlesec}
+\titlespacing*{\section}{0pt}{10pt}{5pt}
+\titlespacing*{\subsection}{0pt}{8pt}{4pt}
+
+\newcommand{\Wrr}{\ensuremath{W}}
+\newcommand{\Vrep}{\ensuremath{V}}
+\newcommand{\Ms}{\ensuremath{M_s}}
+
+\title{Remember What You Thought, Not What You Said:\\
+Workspace-Gated Episodic Memory for LLMs}
+\author{Hanqi Jiang \quad Junhao Chen \quad Yi Pan \quad Weihang You \quad Tianming Liu\\
+\small School of Computing, University of Georgia}
+\date{}
+
+\begin{document}
+\maketitle
+
+\begin{center}
+\itshape ``We can know more than we can tell.''\\[2pt]
+{\upshape --- Michael Polanyi, \emph{The Tacit Dimension} (1966)}
+\end{center}
+\vspace{4pt}
+
+\begin{abstract}
+Memory-limited LLM agents decide what to store by asking the model what is
+important, the self-rated importance scores introduced by Generative Agents
+and inherited by most agent memory systems. Under experimental control of
+content provenance, we show this practice fails exactly where memory matters
+most: information the model inferred while reading but never wrote down. On
+sparsely cued construct-valid benchmarks, verbal importance ratings fall at
+or below chance as a ranking signal, while the same models demonstrably
+carry the inferred content: a training-free workspace readout of the residual
+stream, derived from the J-lens construction, recovers it on one-hop designs
+(AUC $0.63$--$0.67$ at 7B, three model families), and causally patching the
+corresponding directions flips memory-based answers where sham directions do
+not ($0.70$ vs.\ $0.05$ at 7B, $p{=}2.4\times10^{-4}$). The model knows
+more than it tells, so we gate memory on what it knows: a training-free
+write gate that scores candidates with the workspace readout instead of an
+importance probe costs zero probe passes, matches the canonical 1--10 rating
+downstream while remaining predictive on construct-valid content where the
+rating falls to chance, shows no detectable difference from the selection
+oracle at 7B on the construct-valid benchmark ($0.525$ vs.\ $0.525$; 95\%
+CI on the paired difference $[-0.09, +0.08]$), and significantly beats the
+binary probe variant it is dropped into ($p{=}0.0013$ there;
+$p{=}0.0004$ at 0.5B on the mixed stream). The telling is also repairable:
+${\sim}500$ self-distillation steps on the model's own workspace rankings
+lift held-out verbal calibration from ${\approx}0.3$ to $0.62$--$0.65$ on
+average across seeds (best $0.75$) in both families tested. Agents
+should remember what they thought, not what they say they thought.
+\end{abstract}
+
+\input{sections/intro}
+\input{sections/related}
+\input{sections/setup}
+\input{sections/method}
+\input{sections/results}
+\input{sections/extensions}
+\input{sections/conclusion}
+
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\clearpage
+\appendix
+\input{sections/appendix}
+
+\end{document}

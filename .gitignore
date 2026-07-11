@@ -1,0 +1,16 @@
+*.aux
+*.log
+*.out
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+main_round*.pdf
+main_polished.pdf
+main_refined.pdf
+R6_REVIEW.md
+REVIEW_ROUND*.md
+PAPER_CLAIM_AUDIT.md
+CITATION_AUDIT.md
+PIPELINE_REPORT.md

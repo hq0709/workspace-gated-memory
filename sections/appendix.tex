@@ -143,6 +143,21 @@ member (Compositional 7B: $0.594$/$0.631$ vs.\ Leverage alone $0.639$).
 
 \begin{figure}[t]
 \centering
+\includegraphics[width=\textwidth]{figures/fig5_causal.pdf}
+\caption{\textbf{The workspace direction is causally load-bearing.} Steering
+the residual stream along the stored bridge's input-side direction, while the
+model answers from memory, versus norm-matched sham directions built from
+unrelated held-out bridges (20 disjoint pairs). \textbf{(a)} At 7B the memory
+answer starts far below the decision boundary (baseline log-odds median
+$-27.8$; $0\%$ of pairs above $0$); real steering moves $90\%$ of pairs above
+it, sham only $30\%$. \textbf{(b)} The per-pair shift is positive for every
+pair at all three scales and larger for real than sham throughout. The
+direction the readout scores is the direction that decides the answer.}
+\label{fig:causal}
+\end{figure}
+
+\begin{figure}[t]
+\centering
 \includegraphics[width=\textwidth]{figures/fig6_mechanism.pdf}
 \caption{\textbf{The readout reflects content-specific inference, not surface
 statistics.} Reciprocal rank of the bridge token across layers (rows) and

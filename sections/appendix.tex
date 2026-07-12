@@ -140,6 +140,24 @@ member (Compositional 7B: $0.594$/$0.631$ vs.\ Leverage alone $0.639$).
 
 \section{Causal Intervention: Full Results}
 \label{app:causal}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_mechanism.pdf}
+\caption{\textbf{The readout reflects content-specific inference, not surface
+statistics.} Reciprocal rank of the bridge token across layers (rows) and
+context positions (columns) for three representative Decoupled episodes; the
+bridge never appears in the text. In each case decodability concentrates at
+the token that licenses the inference, not uniformly or at the concept's own
+(absent) mention: ``the largest planet'' for Jupiter, ``the sacred river'' for
+India (Ganges), ``a dark shaft'' for gold (Witwatersrand), with the peak
+(highlighted) in mid-to-late layers. The readout measures where the model
+performs the inference, which is why it tracks utility that a surface or
+frequency signal cannot (\S\ref{sec:dissociation}) and why steering there
+changes the answer (\S\ref{sec:causal}).}
+\label{fig:mechanism}
+\end{figure}
+
 \begin{figure}[h]
 \centering
 \includegraphics[width=0.55\textwidth]{figures/figA_causal.pdf}

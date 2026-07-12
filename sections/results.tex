@@ -58,31 +58,13 @@ relevance also fails on inferred bridges
 (chance on Evoked/Decoupled, $0.40$ on Compositional) and the workspace beats it decisively on Decoupled
 ($+0.170$ $[+0.072, +0.275]$): neither self-report nor retrieval-style relevance
 sees what the model inferred.
-
-\begin{figure}[t]
-\centering
-\includegraphics[width=\textwidth]{figures/fig6_mechanism.pdf}
-\caption{\textbf{The readout reflects content-specific inference, not surface
-statistics.} Reciprocal rank of the bridge token across layers (rows) and
-context positions (columns) for three representative Decoupled episodes; the
-bridge never appears in the text. In each case decodability concentrates at
-the token that licenses the inference, not uniformly or at the concept's own
-(absent) mention: ``the largest planet'' for Jupiter, ``the sacred river'' for
-India (Ganges), ``a dark shaft'' for gold (Witwatersrand), with the peak
-(orange box) in mid-to-late layers. The readout is measuring where the model
-performs the inference, which is why it tracks utility that a surface or
-frequency signal cannot (\S\ref{sec:dissociation}) and why steering there
-changes the answer (\S\ref{sec:causal}).}
-\label{fig:mechanism}
-\end{figure}
-
-The signal is not a surface artifact. Figure~\ref{fig:mechanism} localizes it:
-the inferred bridge becomes decodable specifically at the context token that
+The signal is not a surface artifact: it localizes to the context token that
 licenses the inference, in mid-to-late layers, rather than uniformly across
-the passage or at the concept's own mention, which never occurs. This is the
-readout reading a context-specific computation, consistent with its
-above-chance recovery where surface and embedding relevance are at chance
-(Table~\ref{tab:master}) and with the causal test of \S\ref{sec:causal}.
+the passage or at the concept's own mention, which never occurs
+(Fig.~\ref{fig:mechanism}, App.~\ref{app:causal}). This is the readout reading
+a context-specific computation, consistent with its above-chance recovery
+where surface and embedding relevance are at chance (Table~\ref{tab:master})
+and with the causal test of \S\ref{sec:causal}.
 
 \subsection{Limits of Static Readouts}
 \label{sec:boundary}

@@ -59,6 +59,31 @@ relevance also fails on inferred bridges
 ($+0.170$ $[+0.072, +0.275]$): neither self-report nor retrieval-style relevance
 sees what the model inferred.
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig6_mechanism.pdf}
+\caption{\textbf{The readout reflects content-specific inference, not surface
+statistics.} Reciprocal rank of the bridge token across layers (rows) and
+context positions (columns) for three representative Decoupled episodes; the
+bridge never appears in the text. In each case decodability concentrates at
+the token that licenses the inference, not uniformly or at the concept's own
+(absent) mention: ``the largest planet'' for Jupiter, ``the sacred river'' for
+India (Ganges), ``a dark shaft'' for gold (Witwatersrand), with the peak
+(orange box) in mid-to-late layers. The readout is measuring where the model
+performs the inference, which is why it tracks utility that a surface or
+frequency signal cannot (\S\ref{sec:dissociation}) and why steering there
+changes the answer (\S\ref{sec:causal}).}
+\label{fig:mechanism}
+\end{figure}
+
+The signal is not a surface artifact. Figure~\ref{fig:mechanism} localizes it:
+the inferred bridge becomes decodable specifically at the context token that
+licenses the inference, in mid-to-late layers, rather than uniformly across
+the passage or at the concept's own mention, which never occurs. This is the
+readout reading a context-specific computation, consistent with its
+above-chance recovery where surface and embedding relevance are at chance
+(Table~\ref{tab:master}) and with the causal test of \S\ref{sec:causal}.
+
 \subsection{Limits of Static Readouts}
 \label{sec:boundary}
 
@@ -149,11 +174,28 @@ selection quality has no effect.
 \subsection{Causal Analysis}
 \label{sec:causal}
 
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/fig5_causal.pdf}
+\caption{\textbf{The workspace direction is causally load-bearing.} Steering
+the residual stream along the stored bridge's input-side direction, while the
+model answers from memory, versus norm-matched sham directions built from
+unrelated held-out bridges (20 disjoint pairs). \textbf{(a)} At 7B the memory
+answer starts far below the decision boundary (baseline log-odds median
+$-27.8$; $0\%$ of pairs above $0$); real steering moves $90\%$ of pairs above
+it, sham only $30\%$. \textbf{(b)} The per-pair shift is positive for every
+pair at all three scales and larger for real than sham throughout. The
+direction the readout scores is the direction that decides the answer.}
+\label{fig:causal}
+\end{figure}
+
 The predictive results alone do not establish that the answer computation uses
-the representations the readout measures. To test this directly, we steer the residual stream along the stored bridge's
+the representations the readout measures; this section shows that it does.
+To test this directly, we steer the residual stream along the stored bridge's
 input-side difference-of-means direction \citep{zou2023repe} toward a
 different bridge while the model answers from memory, versus sham directions
-built from unrelated bridges on held-out episodes (20 disjoint pairs).
+built from unrelated bridges on held-out episodes (20 disjoint pairs;
+Fig.~\ref{fig:causal}).
 Table~\ref{tab:causal}: at the gentlest scale the real direction flips the
 answer in $0.60$ of pairs versus $0.10$ for sham at 3B (McNemar $+11/-1$,
 $p{=}0.0063$) and in $0.70$ versus $0.05$ at 7B ($+13/-0$,

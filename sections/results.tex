@@ -68,6 +68,21 @@ a context-specific computation, consistent with its above-chance recovery
 where surface and embedding relevance are at chance (Table~\ref{tab:master})
 and with the causal test of \S\ref{sec:causal}.
 
+The dissociation is not a fixed-scale curiosity but sharpens with model
+capability. Table~\ref{tab:q3scale} traces it across the newest Qwen3 family:
+on silently inferred content the workspace$-$verbal gap is significantly
+positive at both capable scales (4B and 8B, in every inferred regime) and
+reaches $+0.317$ on Decoupled at 8B, on par with the strongest dissociation we
+measure in any family (Table~\ref{tab:master}),
+while on explicit content it is null or favors the verbal report (significantly
+so at 1.7B). The verbal channel does not improve with scale on inferred content
+--- it stays anti-calibrated, below chance --- even as the workspace readout
+climbs: the larger model carries more of the silent inference in its state yet
+reports it no better, which is exactly the regime where a workspace gate pays
+off.
+
+\input{tables/tab_q3scale}
+
 \subsection{Limits of Static Readouts}
 \label{sec:boundary}
 

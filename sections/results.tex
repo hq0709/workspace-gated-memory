@@ -219,11 +219,11 @@ Verbal (binary probe) & 0.290 & 0.329 & 0.463 & 0.555 \\
 Verbal (1--10 rating) & 0.343 & 0.410 & 0.491 & 0.601 \\
 Embedding & 0.350 & 0.442 & 0.477 & 0.583 \\
 Cond.\ likelihood (one pass/cand.) & \textbf{0.375} & \textbf{0.466} & \textbf{0.537} & 0.618 \\
-Workspace (zero passes) & 0.332 & 0.431 & 0.502 & \textbf{0.636} \\
+\wsrow Workspace (zero passes) & 0.332 & 0.431 & 0.502 & \textbf{0.636} \\
 PRG (routed) & 0.336 & 0.417 & \textbf{0.512} & 0.565 \\
 \addlinespace
-Absence heuristic (diagnostic) & 0.459 & 0.459 & 0.629 & 0.636 \\
-Oracle & 0.512 & 0.484 & 0.657 & 0.707 \\
+\refrow Absence heuristic (diagnostic) & 0.459 & 0.459 & 0.629 & 0.636 \\
+\refrow Oracle & 0.512 & 0.484 & 0.657 & 0.707 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -235,14 +235,19 @@ score rather than a memory system, the comparison holds the pipeline fixed
 and varies only the score; an end-to-end comparison against full memory
 frameworks would confound retrieval, organization, and prompting with the
 admission signal under study, and every such framework can adopt whichever
-score wins here. Three results follow. First, replacing the
+score wins here. Three results follow.
+
+\myparagraph{The workspace gate beats the binary probe.}
+Replacing the
 binary importance probe with the workspace readout wins at $k{=}3$ at both
 scales ($+47/-18$, $p{=}0.0004$, confirmatory under Holm correction over the
 full test family; $+45/-22$, $p{=}0.0067$ uncorrected, marginal after
 correction; App.~\ref{app:prg}),
 and the workspace channel is never significantly worse than any
-content-scoring policy in any cell. Second, the failure is specific to the verbal channel, not to internal
-signals generally: against the canonical 1--10
+content-scoring policy in any cell.
+
+\myparagraph{The failure is specific to the verbal channel, not to internal signals generally.}
+Against the canonical 1--10
 rating, the strongest verbal form, workspace gating is numerically ahead at
 7B ($0.636$ vs.\ $0.601$, $p{=}0.31$) at zero probe cost, where the rating
 spends one forward pass per candidate, and on the construct-valid slice the
@@ -253,7 +258,9 @@ itself beats the binary probe ($p{\le}0.035$ in three of four cells,
 $p{=}0.051$ in the fourth; App.~\ref{app:prg}); the readout is the internal
 signal that needs no extra passes and carries the causal grounding of
 \S\ref{sec:causal}.
-Third, at the tight 7B budget provenance routing is the strongest policy
+
+\myparagraph{At tight budgets, provenance routing adds a little more.}
+At the tight 7B budget provenance routing is the strongest policy
 that spends no per-candidate forward passes ($0.512$ vs.\ $0.502$
 single-channel) and helps where the channels are complementary; the single-channel
 gate is the recommended default at capable scale. Calibration matters:

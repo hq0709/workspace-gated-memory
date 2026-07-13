@@ -8,9 +8,21 @@
 \usepackage{multirow}
 \usepackage{graphicx}
 \usepackage{microtype}
-\usepackage{xcolor}
+\usepackage[table]{xcolor}
 \definecolor{failorange}{HTML}{C16E71}
 \definecolor{wsblue}{HTML}{6E8FB2}
+% --- exemplar-style table/writing toolkit, rendered in the paper's muted palette ---
+\definecolor{gain}{HTML}{4E8A6B}   % readable sage green (same family as figure sage #7DA494)
+\definecolor{loss}{HTML}{B5545A}   % readable muted terracotta (same family as V/rose #C16E71)
+\definecolor{deltaz}{gray}{0.55}   % neutral for negligible change
+\newcommand{\dgain}[1]{\,\textcolor{gain}{\scriptsize #1}}   % small green delta, append after a number
+\newcommand{\dloss}[1]{\,\textcolor{loss}{\scriptsize #1}}   % small terracotta delta
+\newcommand{\dzero}[1]{\,\textcolor{deltaz}{\scriptsize #1}} % small neutral delta
+\definecolor{wsRow}{HTML}{EEF3F8}  % very light steel-blue tint for the workspace/method row
+\definecolor{refRow}{gray}{0.955}  % very light gray for reference / oracle / diagnostic rows
+\newcommand{\wsrow}{\rowcolor{wsRow}}
+\newcommand{\refrow}{\rowcolor{refRow}}
+\newcommand{\myparagraph}[1]{\vspace{2pt}\noindent\textbf{#1}\ }
 \usepackage[round]{natbib}
 \usepackage[colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue]{hyperref}
 \usepackage{caption}

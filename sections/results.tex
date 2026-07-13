@@ -20,9 +20,10 @@ size.}
 
 Table~\ref{tab:master} and Fig.~\ref{fig:regime} give the central result. On
 explicit content, the verbal report is the best available signal
-($\Vrep$ up to $0.681$ at 7B; $\Vrep$ exceeds $\Wrr$ in all three families,
-significantly in two under cluster CIs, and embedding relevance also beats
-$\Wrr$ there): when importance is written on the surface, asking the model
+($\Vrep$ up to $0.681$ at 7B; $\Vrep$ exceeds $\Wrr$ in three of four
+families, significantly in two under cluster CIs, and sits at chance alongside
+$\Wrr$ in the fourth (Qwen3-8B), where the explicit items are simply less
+salient to both channels; embedding relevance also beats $\Wrr$ where $\Vrep$ does): when importance is written on the surface, asking the model
 works, and cheap heuristics work well too. The asymmetry is mechanically
 natural: by the end of encoding, surface mentions are largely no longer
 decodable at the readout position whether useful or not (median $\Wrr$
@@ -31,15 +32,15 @@ little utility signal there, while the probe re-reads the full context and
 can evaluate exactly the surface content it sees. On evoked silent bridges the ordering reverses. On the construct-valid benchmarks (Decoupled here, Compositional in
 \S\ref{sec:boundary}) $\Vrep$ drops to $0.25$--$0.49$ on Decoupled ($0.17$ on Compositional), at
 or below chance, with confident yes-ratings concentrated on vivid
-distractors, while $\Wrr$ reads $0.53$--$0.67$ on Decoupled (at chance
-on Compositional for two of three families, \S\ref{sec:boundary}); on the
+distractors, while $\Wrr$ reads $0.53$--$0.67$ on Decoupled (at or near
+chance on Compositional for three of four families, \S\ref{sec:boundary}); on the
 answer-coupled Evoked benchmark $\Vrep$ is more variable
 (above chance at 7B) yet still loses to $\Wrr$ where the contrast is significant
 (Table~\ref{tab:master}). The paired difference is
 significant at three of four sizes on the original construct-valid Decoupled
 set and at 1.5B on the 120-episode scaled set built for that knife-edge case
 (Bonferroni-corrected cluster CIs, both intervals reported in
-App.~\ref{app:prereg}), in all three model families, and for all three
+App.~\ref{app:prereg}), in all four model families, and for all three
 probe wordings (App.~\ref{app:vrobust}). Across
 three benchmark generators the two channels differ in kind: the workspace
 readout stays within a narrow band ($0.53$--$0.66$ on the Decoupled design)
@@ -50,8 +51,9 @@ predicts 7B reporter success (Spearman $\rho{=}0.25$, $p{=}4\times10^{-4}$
 within the primary generator) while the workspace readout is flat in it
 ($\rho{=}0.10$, $p{=}0.14$; full analysis in App.~\ref{app:replications}). The model knows more than it tells, and the
 telling, not the knowing, is the unstable channel: a gate can bet on the
-readout. In $\Ms$ terms: in the explicit regime the verbal channel dominates the
-workspace channel outright ($\Vrep{>}\Wrr$ significantly), while on the
+readout. In $\Ms$ terms: in the explicit regime the verbal channel matches or beats the
+workspace channel in three of four families (both at chance in Qwen3-8B),
+significantly in two, while on the
 construct-valid benchmarks $\Ms$ goes negative at every scale where it is
 defined: the report ranks the truly useful items below the rest. Embedding
 relevance also fails on inferred bridges

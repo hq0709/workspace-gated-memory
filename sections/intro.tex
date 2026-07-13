@@ -34,8 +34,8 @@ on the J-lens ``workspace'' construction of \citet{anthropic2026workspace}, we r
 each concept's availability directly off the residual stream at the end of
 encoding: the peak reciprocal rank of the concept's token across layers under the
 logit lens \citep{nostalgebraist2020logitlens}. This readout ranks the silently inferred bridges that self-report rejects
-above the competing candidates (AUC $0.63$--$0.67$ at 7B across three model
-families), is not explained by surface presence, embedding relevance, or
+above the competing candidates (AUC $0.62$--$0.67$ at 7--8B across four model
+families, including the latest Qwen3), is not explained by surface presence, embedding relevance, or
 prompt wording (App.~\ref{app:vrobust}), and is causally load-bearing: steering the
 bridge's input-side direction while the model answers from memory changes the
 answer far more often than a sham direction ($0.70$ vs.\ $0.05$ flip rate at
@@ -61,7 +61,7 @@ the workspace channel and QA accuracy statistically unchanged
 \textbf{(1)}~A content-provenance regime map for LLM introspective salience:
 verbal importance reports are reliable for explicit content and fall at or
 below chance for construct-valid silently inferred content, replicated across
-three model families and three probe wordings, with episode-cluster bootstrap
+four model families (including the latest Qwen3 generation) and three probe wordings, with episode-cluster bootstrap
 statistics and a machine analogue of metacognitive efficiency
 (\S\ref{sec:setup}, \S\ref{sec:results}). We release the four
 provenance-controlled benchmarks, show that existing naturalistic benchmarks
@@ -108,7 +108,7 @@ whether \emph{madrid} is worth remembering, it confidently says no. A budget-$k$
 that trusts the verbal report discards exactly the item needed to answer ``What
 language should Elena use?''. \textbf{Right:} AUC of each channel at identifying
 truly load-bearing items (Qwen-3B shown; same qualitative dissociation at
-3B--7B in all three families, with knife-edge small-scale cells noted in
+3B--7B in all four families, with knife-edge small-scale cells noted in
 App.~\ref{app:prereg};
 Table~\ref{tab:master}): the verbal report is good for explicit content but
 below chance for construct-valid silently inferred content (boxed cell;

@@ -380,6 +380,21 @@ underperforms workspace gating in both settings; on evoked-bridge benchmarks thi
 is expected, since the decisive item never occurs in the text and has no surface
 features to fuse.
 
+\section{Aggregation Robustness of the Workspace Readout}
+\label{app:aggrobust}
+The peak-over-layers form of Eq.~\ref{eq:wrr} is a deliberate but not a delicate
+choice. Recomputing the end-position reciprocal ranks per layer from a single
+forward pass and re-aggregating them shows the readout is stable to the choice
+(Table~\ref{tab:aggrobust}): a smooth mean over all layers matches the peak to
+within $0.01$ AUC on both Evoked and Decoupled, a leave-one-layer-out sweep
+moves AUC by at most $0.03$ (so no individual layer carries the signal), and any
+band that includes the late layers recovers the score. Because $W$ itself is
+essentially unchanged under the mean aggregation, its margin over embedding
+relevance on Decoupled ($W{-}E$, Table~\ref{tab:master}) is preserved. The
+signal is a stable late-layer property, matching the token- and layer-localized
+peaks of Fig.~\ref{fig:mechanism}.
+\input{tables/appA_aggrobust}
+
 \section{Metacognitive Alignment: Details}
 \label{app:metacog}
 Training set: 1{,}040 importance-probe examples (top-2 workspace-ranked items per

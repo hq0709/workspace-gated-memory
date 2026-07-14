@@ -131,7 +131,10 @@ W(c; x) \;=\; \max_{\ell \le L} \;\max_{t \in T(c)}\;
 where $T(c)$ is the small set of case-variant first tokens of $c$
 (App.~\ref{app:repro}). $W$ is training-free, requires no forward passes beyond
 encoding, and is read blind to $q$; reciprocal rank rather than probability
-keeps the score scale-free across a ${\sim}150$k-token vocabulary.
+keeps the score scale-free across a ${\sim}150$k-token vocabulary. The readout
+is robust to the aggregation: a smooth mean over layers matches the peak to
+within $0.01$ AUC, no single layer is load-bearing (leave-one-out ${\le}0.03$),
+and any late-layer band recovers the score (App.~\ref{app:aggrobust}).
 
 \textbf{Verbal channel.}
 The same model is asked directly. With yes/no token sets $Y, N$ and the

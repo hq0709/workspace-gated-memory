@@ -131,12 +131,7 @@ W(c; x) \;=\; \max_{\ell \le L} \;\max_{t \in T(c)}\;
 where $T(c)$ is the small set of case-variant first tokens of $c$
 (App.~\ref{app:repro}). $W$ is training-free, requires no forward passes beyond
 encoding, and is read blind to $q$; reciprocal rank rather than probability
-keeps the score scale-free across a ${\sim}150$k-token vocabulary. The double
-maximum over layers and case-variant first tokens is an empirical aggregation
-choice, not a derived optimum: it is motivated by scale-invariance, and we
-compare $W$ against a conditional log-likelihood score and a trained
-future-token lens (\S\ref{sec:extensions}, App.~\ref{app:vrobust}) rather than
-claim optimality for the aggregation itself.
+keeps the score scale-free across a ${\sim}150$k-token vocabulary.
 
 \textbf{Verbal channel.}
 The same model is asked directly. With yes/no token sets $Y, N$ and the
@@ -171,10 +166,7 @@ Bonferroni-corrected. By loose analogy with metacognitive-sensitivity analysis
 reported only where $\mathrm{AUC}(W)\ge 0.55$; $\Ms<0$ indicates that the
 verbal report ranks truly load-bearing items below the rest even though the
 signal is present in the system ($\Ms$ is negative throughout the
-construct-valid regime; on answer-coupled Evoked it can be positive). We read
-$\Ms$ qualitatively only: the denominator $\mathrm{AUC}(W){-}0.5$ is small near
-chance, so the ratio is unstable there (hence the $0.55$ floor) and we
-interpret its sign and coarse magnitude, not its precise value. Throughout, ``below chance'' refers to
+construct-valid regime; on answer-coupled Evoked it can be positive). Throughout, ``below chance'' refers to
 ranking AUC, not probabilistic calibration in the forecasting sense.
 Downstream, Eq.~\eqref{eq:acc} is estimated per policy and budget with
 per-episode correctness logged for every condition; policies are compared on

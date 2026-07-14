@@ -100,14 +100,10 @@ readout position independent of context length (under $0.2$\,MB at 7B in
 bf16, computable layer-by-layer during the forward pass), orders of
 magnitude below the KV cache the same pass maintains.
 In wall-clock terms the added compute is the $L$ per-layer logit-lens
-projections (the forward pass unembeds only the final layer) plus a rank
-lookup per candidate: on one RTX A5000 in bf16 at 7B this is ${\sim}1.6$\,ms
-for the projections and ${\sim}3$\,/\,${\sim}14$\,ms end-to-end for
-$|C|{=}10$\,/\,$100$ candidates with a naive rank scan, reducible by sorting
-each layer's decoding once, against the seconds the agent already spends
-generating. The overhead grows with the candidate count but not with context
-length; on the surface route the sentence encoder $\phi$ adds one call per
-candidate, the only additional model in the loop.
+projections plus a rank lookup: on one RTX A5000 in bf16 at 7B this is
+${\sim}1.6$\,ms for the projections and only a few milliseconds end-to-end for
+typical candidate sets, negligible against the seconds the agent already spends
+generating, and independent of context length.
 
 \begin{algorithm}[t]
 \caption{PRG: provenance-routed write admission}

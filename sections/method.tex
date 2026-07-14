@@ -43,18 +43,28 @@ routes.
 \IfFileExists{figures/main.png}{%
 \includegraphics[width=\textwidth]{figures/main.png}}{%
 \fbox{\parbox[c][4.2cm][c]{0.88\textwidth}{\centering
-\emph{Architecture figure (figures/architecture.pdf).}\\[4pt]
+\emph{Architecture figure (figures/main.png).}\\[4pt]
 Panels: context encoding $\rightarrow$ candidate set; provenance test $\rho$;
 workspace route ($\rho{=}0$, Eq.~\ref{eq:wrr}) and relevance route
 ($\rho{=}1$); percentile-rank calibration; budget-$k$ admission; memory store
 $\rightarrow$ recall QA.}}}
-\caption{The PRG write gate. Candidates proposed by the host memory system are
-split by the provenance test $\rho$ (here a substring check against the source
-context): surface-present candidates are scored by embedding relevance, and
-absent (inferred) candidates by the workspace readout, the channel that
-tracks their utility most reliably in our experiments. Rank calibration places both routes on a common scale
-before budget-$k$ admission. The gate adds no training and no model calls
-beyond the encoding pass.}
+\caption{\textbf{The PRG write gate, on the running example.} Reading
+``Elena wandered the Plaza Mayor\ldots'', the model silently infers the bridge
+\emph{Madrid}, a concept that never appears in the text. A J-lens
+``$\mathrm{J}$-space'' readout exposes each candidate's per-layer vocabulary
+logits across the residual stream; the workspace score is the peak reciprocal
+rank of the candidate's token over layers (Eq.~\ref{eq:wrr}). Each candidate
+proposed by the host memory system is then routed by the provenance test
+$\rho$ (here a substring check against the source context): surface-present
+items (\emph{Plaza Mayor}, \emph{Fountain}, \ldots) are scored by embedding
+relevance, while absent, inferred items (\emph{Madrid}) are scored by the
+workspace readout, the channel that tracks their utility most reliably in our
+experiments. Percentile-rank calibration places both routes on a common scale,
+and budget-$k$ admission keeps the top-ranked items (dashed cutoff): the
+inferred \emph{Madrid} is admitted rather than discarded, so the downstream
+recall question ``What language should Elena use?'' is answered correctly
+(\emph{Spanish}). The gate adds no training and no model calls beyond the
+encoding pass.}
 \label{fig:arch}
 \end{figure}
 

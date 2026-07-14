@@ -99,6 +99,15 @@ readout needs only the final-position residual at each layer, $O(Ld)$ per
 readout position independent of context length (under $0.2$\,MB at 7B in
 bf16, computable layer-by-layer during the forward pass), orders of
 magnitude below the KV cache the same pass maintains.
+In wall-clock terms the added compute is the $L$ per-layer logit-lens
+projections (the forward pass unembeds only the final layer) plus a rank
+lookup per candidate: on one RTX A5000 in bf16 at 7B this is ${\sim}1.6$\,ms
+for the projections and ${\sim}3$\,/\,${\sim}14$\,ms end-to-end for
+$|C|{=}10$\,/\,$100$ candidates with a naive rank scan, reducible by sorting
+each layer's decoding once, against the seconds the agent already spends
+generating. The overhead grows with the candidate count but not with context
+length; on the surface route the sentence encoder $\phi$ adds one call per
+candidate, the only additional model in the loop.
 
 \begin{algorithm}[t]
 \caption{PRG: provenance-routed write admission}
@@ -116,6 +125,21 @@ magnitude below the KV cache the same pass maintains.
 \State \Return top-$k$ of $C$ by $S$
 \end{algorithmic}
 \end{algorithm}
+
+\myparagraph{Worked example (illustrative).}
+Take the episode of Fig.~\ref{fig:arch} with budget $k{=}3$ and candidate set
+$C{=}\{$\emph{Madrid}, Plaza Mayor, Fountain, Cafe, Weather$\}$. The provenance
+test sends the four surface-present items to embedding relevance and the
+inferred bridge \emph{Madrid} (absent from the text) to the workspace readout.
+The two channels' raw scores are incomparable, but percentile calibration
+against the running window places them on one $[0,1]$ scale:
+\emph{Madrid} $0.93$, Plaza Mayor $0.78$, Fountain $0.62$, Weather $0.33$,
+Cafe $0.20$. Budget-$3$ admission keeps $\{$\emph{Madrid}, Plaza Mayor,
+Fountain$\}$, so the later question ``What language should Elena use?'' is
+answerable (\emph{Spanish}). The verbal importance probe rates \emph{Madrid}
+unimportant ($0.15$) and would drop it, keeping three vivid surface words and
+failing the question. Scores here are illustrative of the pipeline; the
+measured rankings are in \S\ref{sec:results}.
 
 \textbf{What is new.}
 To our knowledge this is the first write gate to score memory candidates'

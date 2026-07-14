@@ -65,7 +65,11 @@ derivative of expected future answering utility along the concept's input-side
 direction, the infinitesimal form of the causal intervention in
 \S\ref{sec:causal}, computed by backpropagation without training: one
 forward-plus-backward pass per episode--question pair, with every candidate
-scored from the same gradient).
+scored from the same gradient). The expectation $\mathbb{E}_q$ is taken over a
+fixed bank of 12 probe-blind questions per episode, with utility scored on the
+model's own greedy answers $\hat a_q$ rather than gold answers; sensitivity to
+this bank and to the answer surrogate is not characterized here and is a
+limitation.
 Table~\ref{tab:family} shows a clean double dissociation between readouts:
 decode-based members own the evoked regime (Rehearsal reaches $0.684$ on Evoked,
 improving on Spotlight), while Leverage is the only member that recovers
